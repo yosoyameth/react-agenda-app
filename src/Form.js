@@ -6,9 +6,54 @@ class Form extends Component {
 
 		this.initialState = {
 			name: '',
-			job: ''
+			mail: ''
 		};
 
 		this.state = this.initialState;
 	}
+
+	handleChange = event => {
+		const { name, value } = event.target
+
+		this.setState({
+			[name]: value, 
+		}) 
+	};
+
+	submitForm = () => {
+		this.props.handleSubmit(this.state)
+		this.setState(this.initialState)
+	};
+
+	render() {
+		const { name, mail } = this.state;
+
+		return (
+			<form>
+				<label>Name</label>
+				<input 
+					type="text"
+					name="name"
+					value={name}
+					onChange={this.handleChange}
+				/>
+				<label>Mail</label>
+				<input 
+					type="text"
+					name="mail"
+					value={mail}
+					onChange={this.handleChange}
+				/>
+				<input 
+					type="button"
+					value="Submit"
+					onClick={this.submitForm}
+				/>
+			</form>
+		);
+	}
 }
+
+export default Form;
+
+
